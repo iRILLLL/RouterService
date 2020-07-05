@@ -61,6 +61,20 @@ public final class RouterService: RouterServiceProtocol, RouterServiceRegistrati
             animated: animated
         )
     }
+    
+    public func getViewController(
+        forRoute route: Route,
+        fromView viewController: UIViewController
+    ) -> UIViewController {
+        guard let handler = handler(forRoute: route) else {
+            fatalError(#file + "\n" + #function)
+        }
+        let newVC = handler.destination(
+            forRoute: route,
+            fromViewController: viewController
+        ).build(store, route)
+        return newVC
+    }
 
     func handler(forRoute route: Route) -> RouteHandler? {
         let routeIdentifier = type(of: route).identifier

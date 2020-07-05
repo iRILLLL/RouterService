@@ -8,6 +8,11 @@ public protocol RouterServiceProtocol: Dependency, RouterServiceAnyRouteDecoding
         presentationStyle: PresentationStyle,
         animated: Bool
     )
+    
+    func getViewController(
+        forRoute route: Route,
+        fromView viewController: UIViewController
+    ) -> UIViewController 
 }
 
 public typealias DependencyFactory = () -> Dependency
